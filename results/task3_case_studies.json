@@ -1,0 +1,104 @@
+[
+  {
+    "input_text": "no tags",
+    "true_genre": "Experimental",
+    "predicted_genre": "Rock",
+    "top_attended_tokens": [
+      [
+        "no",
+        0.2652
+      ],
+      [
+        "tags",
+        0.2648
+      ]
+    ],
+    "graph_num_nodes": 3,
+    "graph_num_edges": 4,
+    "graph_top_edges_by_weight": [
+      [
+        0,
+        1,
+        0.6112637519836426
+      ],
+      [
+        1,
+        0,
+        0.6112637519836426
+      ],
+      [
+        1,
+        2,
+        -0.25620415806770325
+      ]
+    ]
+  },
+  {
+    "input_text": "no tags",
+    "true_genre": "Rock",
+    "predicted_genre": "Electronic",
+    "top_attended_tokens": [
+      [
+        "tags",
+        0.3559
+      ],
+      [
+        "no",
+        0.3364
+      ]
+    ],
+    "graph_num_nodes": 4,
+    "graph_num_edges": 6,
+    "graph_top_edges_by_weight": [
+      [
+        1,
+        2,
+        -0.15193966031074524
+      ],
+      [
+        2,
+        1,
+        -0.15193966031074524
+      ],
+      [
+        0,
+        1,
+        -0.3249376118183136
+      ]
+    ]
+  },
+  {
+    "input_text": "no tags",
+    "true_genre": "Rock",
+    "predicted_genre": "Electronic",
+    "top_attended_tokens": [
+      [
+        "tags",
+        0.3474
+      ],
+      [
+        "no",
+        0.3327
+      ]
+    ],
+    "graph_num_nodes": 4,
+    "graph_num_edges": 6,
+    "graph_top_edges_by_weight": [
+      [
+        1,
+        2,
+        0.5875235199928284
+      ],
+      [
+        2,
+        1,
+        0.5875235199928284
+      ],
+      [
+        2,
+        3,
+        -0.6605150699615479
+      ]
+    ]
+  }
+]
