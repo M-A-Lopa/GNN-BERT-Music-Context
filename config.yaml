@@ -1,0 +1,84 @@
+# Central configuration for the GNN-BERT music context project.
+#
+# Dataset is chosen per task (assignment Table 1 gives per-task coverage,
+# not one dataset for everything):
+#   Task 1 (BERT tags)        -> magnatagatune  (rich 188-tag multi-label text)
+#   Task 2 (GNN structure)    -> fma_medium     (genre labels suit graph classification)
+#   Task 3 (GNN-BERT fusion)  -> fma_medium     (same as Task 2: graphs + tags share
+#                                                 track IDs, no cross-dataset alignment)
+#   Task 4 (Contrastive)      -> musiccaps      (only source with NL captions)
+#
+# train.py should read dataset.task_overrides[task] to pick the active
+# dataset for a given --task run; dataset.default is the fallback if a task
+# has no override.
+
+seed: 42
+
+data:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  splits_dir: data/splits
+
+dataset:
+  default: magnatagatune         # fallback if a task has no override below
+  task_overrides:
+    1: magnatagatune
+    2: fma_medium
+    3: fma_medium
+    4: musiccaps
+  # options: magnatagatune | fma_small | fma_medium | gtzan | musiccaps | deam
+  sample_rate: 22050
+  segment_seconds: 7.5          # window for fixed-length segmentation
+  top_k_tags: 50                 # for tag classification tasks (Task 1, Task 3)
+  num_genre_classes: 16          # for genre classification tasks (Task 2, FMA range is 8-16)
+  magnatagatune:
+    annotations_csv: data/raw/magnatagatune/annotations_final.csv
+    mask_ratio: 0.5              # fraction of a clip's tags shown as pseudo-caption text (see src/datasets.py)
+  fma:
+    tracks_csv: data/raw/fma/fma_metadata/tracks.csv
+    raw_tracks_csv: data/raw/fma/fma_metadata/raw_tracks.csv   # freeform 'tags' column, used as Task 3 text input
+    audio_dir: data/raw/fma/fma_medium
+    subset: medium                # small | medium | large -- FMA subsets are nested, see src/datasets.py
+
+audio_features:
+  n_mels: 128
+  n_chroma: 12
+  hop_length: 512
+
+graph:
+  segment_similarity_threshold: 0.8   # cosine similarity cutoff (tau) for segment edges
+  chord_transition_min_count: 1        # minimum observed count to keep a chord-transition edge
+
+text:
+  tokenizer: bert-base-uncased
+  max_length: 256
+
+model:
+  bert:
+    name: bert-base-uncased
+    freeze_base: false
+  gnn:
+    type: graphsage              
+    hidden_dim: 128
+    num_layers: 3
+    dropout: 0.2
+  fusion:
+    type: cross_attention        
+  contrastive:
+    temperature: 0.07
+    proj_dim: 128                 
+
+training:
+  batch_size: 32
+  epochs: 20
+  lr: 2.0e-5                      
+  lr_scratch: 1.0e-3              
+  weight_decay: 0.01
+  emotion_loss_weight: 1.0       
+
+paths:
+  results_dir: results
+  metrics_file: results/metrics.json
+  plots_dir: results/plots
+  retrieval_examples_dir: results/retrieval_examples
+  checkpoints_dir: results/checkpoints

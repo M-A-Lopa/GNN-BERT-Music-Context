@@ -1,0 +1,57 @@
+[
+  {
+    "input_text": "techno",
+    "true_tags": [
+      "techno"
+    ],
+    "predicted_tags": [
+      "techno"
+    ]
+  },
+  {
+    "input_text": "electronic, rock",
+    "true_tags": [
+      "electronic",
+      "rock",
+      "fast"
+    ],
+    "predicted_tags": [
+      "techno",
+      "electronic",
+      "rock"
+    ]
+  },
+  {
+    "input_text": "fast",
+    "true_tags": [
+      "fast"
+    ],
+    "predicted_tags": [
+      "fast"
+    ]
+  },
+  {
+    "input_text": "rock",
+    "true_tags": [
+      "rock",
+      "vocal"
+    ],
+    "predicted_tags": [
+      "rock"
+    ]
+  },
+  {
+    "input_text": "vocals, male",
+    "true_tags": [
+      "guitar",
+      "vocal",
+      "male",
+      "vocals",
+      "male vocal"
+    ],
+    "predicted_tags": [
+      "male",
+      "vocals"
+    ]
+  }
+]
